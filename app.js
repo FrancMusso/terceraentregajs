@@ -15,6 +15,9 @@ document.addEventListener("DOMContentLoaded", function () {
         { tipo: 'telefono', valor: telefonos[1] }
       ];
 
+      // Guardar datos en el almacenamiento local
+      localStorage.setItem('datosContacto', JSON.stringify(datosContacto));
+
       const resultadosDiv = document.getElementById("resultados");
 
       const correosFiltrados = obtenerValoresFiltrados(datosContacto, 'correo').join(', ');
@@ -30,10 +33,18 @@ document.addEventListener("DOMContentLoaded", function () {
       console.error("Ocurrió un error al recopilar los datos:", error.message);
     }
   });
-});
 
-function obtenerValoresFiltrados(datos, tipo) {
-  return datos
-    .filter(item => item.tipo === tipo)
-    .map(item => item.valor);
-}
+  // Función para obtener valores filtrados
+  function obtenerValoresFiltrados(datos, tipo) {
+    return datos
+      .filter(item => item.tipo === tipo)
+      .map(item => item.valor);
+  }
+
+  // Obtener datos del almacenamiento local al cargar la página
+  const datosGuardados = localStorage.getItem('datosContacto');
+  if (datosGuardados) {
+    const datosParseados = JSON.parse(datosGuardados);
+    
+  }
+});
